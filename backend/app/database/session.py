@@ -1,12 +1,14 @@
-﻿from typing import Generator
+from typing import Generator
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 from backend.app.core.config import settings
 
-# Normalize legacy or cloud provider postgres:// URLs to SQLAlchemy 2.0 compatible postgresql://
+# Normalize legacy or cloud provider postgres:// and postgresql:// URLs to explicit psycopg2 driver
 database_url = settings.DATABASE_URL
 if database_url.startswith("postgres://"):
-    database_url = database_url.replace("postgres://", "postgresql://", 1)
+    database_url = database_url.replace("postgres://", "postgresql+psycopg2://", 1)
+elif database_url.startswith("postgresql://") and not database_url.startswith("postgresql+"):
+    database_url = database_url.replace("postgresql://", "postgresql+psycopg2://", 1)
 
 # Engine configuration - check for SQLite vs PostgreSQL connection
 connect_args = {}

@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy dependency specifications
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt || true
-RUN pip install --no-cache-dir slowapi>=0.1.10 psycopg2-binary>=2.9.9
+RUN pip install --no-cache-dir slowapi>=0.1.10 psycopg2-binary>=2.9.9 "psycopg[binary]>=3.1.18"
 
 # Copy backend application source code and migrations
 COPY . .
