@@ -106,18 +106,19 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException):
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     request_id = getattr(request.state, "request_id", "N/A")
-    # Simplify error details for clarity
     errors = []
     for err in exc.errors():
         field = " -> ".join([str(loc) for loc in err.get("loc", [])])
         errors.append({"field": field, "message": err.get("msg", "Invalid value")})
+
+    detail_msg = "; ".join([f"{e['field']}: {e['message']}" for e in errors]) if errors else "The request payload failed validation."
 
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         content={
             "error": {
                 "code": "VALIDATION_ERROR",
-                "message": "The request payload failed validation.",
+                "message": detail_msg,
                 "details": errors,
                 "request_id": request_id,
             }
@@ -130,14 +131,13 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
     request_id = getattr(request.state, "request_id", "N/A")
     logger.exception("[%s] Unhandled Server Error: %s", request_id, exc)
 
-    # In production, never leak internal traceback
-    message = str(exc) if settings.DEBUG else "An unexpected internal server error occurred. Please contact Lioc support."
+    error_msg = f"{exc.__class__.__name__}: {str(exc)}"
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content={
             "error": {
                 "code": "INTERNAL_SERVER_ERROR",
-                "message": message,
+                "message": error_msg,
                 "request_id": request_id,
             }
         },
