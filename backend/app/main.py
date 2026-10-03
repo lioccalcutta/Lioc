@@ -1,12 +1,22 @@
-﻿import sys
+import sys
 import logging
+import types
 from pathlib import Path
 from contextlib import asynccontextmanager
 
-# Ensure project root is in sys.path
-_ROOT = Path(__file__).resolve().parent.parent.parent
-if str(_ROOT) not in sys.path:
-    sys.path.insert(0, str(_ROOT))
+# Robust path and package resolution for Local, Render, and Docker deployments
+_APP_DIR = Path(__file__).resolve().parent
+_BACKEND_DIR = _APP_DIR.parent
+_REPO_ROOT = _BACKEND_DIR.parent
+
+for p in [_REPO_ROOT, _BACKEND_DIR, _APP_DIR]:
+    if str(p) not in sys.path:
+        sys.path.insert(0, str(p))
+
+if "backend" not in sys.modules:
+    backend_module = types.ModuleType("backend")
+    backend_module.__path__ = [str(_BACKEND_DIR)]
+    sys.modules["backend"] = backend_module
 
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
