@@ -194,36 +194,36 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 2. Interactive AI Auditor & Product Selector Banner */}
+      {/* 2. Direct Manufacturing & Bulk Wholesale Supply Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-r from-lioc-navy via-slate-900 to-teal-950 text-white rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden border border-slate-800">
           <div className="absolute top-0 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-4 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 text-xs font-bold border border-teal-500/30">
-                <Sparkles className="w-3.5 h-3.5 text-teal-400" />
-                <span>AI Facility Hygiene Auditor & ROI Engine</span>
+                <ShieldCheck className="w-3.5 h-3.5 text-teal-400" />
+                <span>Direct Factory & Institutional Supply</span>
               </div>
               <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
-                Calculate Exact Chemical Consumption & Cut Facility Costs by up to 45%
+                Direct Manufacturer Wholesale Supply for Commercial Facilities
               </h2>
               <p className="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
-                Whether you manage a hotel, hospital, cloud kitchen, or corporate park, our AI Virtual Hygiene Auditor computes your exact monthly concentrate requirements, housekeeping SOP schedules, and direct manufacturer cost savings in 60 seconds.
+                Source commercial-grade floor cleaners, disinfectants, washroom descalers, and janitorial supplies directly from our Kolkata manufacturing facility with certified batch quality and instant bulk quotation.
               </p>
             </div>
             <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-center lg:justify-end">
               <Link
-                href="/virtual-hygiene-auditor"
+                href="/request-quote"
                 className="px-6 py-4 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white font-bold text-sm shadow-lg shadow-teal-500/30 transition-all text-center flex items-center justify-center gap-2 group"
               >
-                <span>Launch AI Hygiene Auditor</span>
+                <span>Request Wholesale Quote</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                href="/product-finder"
+                href="/products"
                 className="px-6 py-3.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 hover:text-white font-bold text-xs border border-slate-700 transition-all text-center"
               >
-                🔍 Quick Product Finder
+                Browse Full Catalog
               </Link>
             </div>
           </div>

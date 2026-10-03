@@ -63,6 +63,21 @@ const nextConfig = {
         destination: "/leadership",
         permanent: true,
       },
+      {
+        source: "/virtual-hygiene-auditor",
+        destination: "/request-quote",
+        permanent: true,
+      },
+      {
+        source: "/product-finder",
+        destination: "/products",
+        permanent: true,
+      },
+      {
+        source: "/compliance",
+        destination: "/products",
+        permanent: true,
+      },
     ];
   },
 };

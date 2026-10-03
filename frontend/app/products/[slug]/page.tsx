@@ -370,21 +370,14 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
           {/* Sidebar / Technical & Safety Specifications */}
           <div className="lg:col-span-4 space-y-6">
-            {/* Technical Information & Compliance Download */}
+            {/* Technical Information & Specifications */}
             {product.technical_information && (
               <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-bold text-lioc-navy flex items-center space-x-2">
                     <FlaskConical className="w-4 h-4 text-lioc-teal" />
-                    <span>Technical Data Sheet (TDS)</span>
+                    <span>Technical Specifications</span>
                   </h3>
-                  <Link
-                    href="/compliance"
-                    className="text-[11px] font-bold text-teal-700 hover:text-teal-900 bg-teal-50 px-2.5 py-1 rounded-lg border border-teal-200 flex items-center space-x-1"
-                  >
-                    <FileText className="w-3.5 h-3.5" />
-                    <span>View Official MSDS</span>
-                  </Link>
                 </div>
                 <div className="space-y-2 text-xs text-slate-600 whitespace-pre-line bg-slate-50 p-4 rounded-xl border border-slate-200/80 font-mono">
                   {product.technical_information}
@@ -392,11 +385,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
                 <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
                   <Link
-                    href="/compliance"
+                    href={`/contact?product=${encodeURIComponent(product.name)}`}
                     className="w-full flex items-center justify-center space-x-1.5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold shadow-sm transition"
                   >
                     <ShieldCheck className="w-3.5 h-3.5 text-teal-400" />
-                    <span>Download Official TDS / MSDS PDF</span>
+                    <span>Inquire About Custom Batch / TDS</span>
                   </Link>
                 </div>
               </div>

@@ -113,16 +113,6 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-xs text-slate-400">
               <li>
-                <Link href="/virtual-hygiene-auditor" className="text-teal-400 font-semibold hover:underline flex items-center gap-1">
-                  <span>✨ AI Virtual Hygiene Auditor</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/product-finder" className="text-teal-400 font-semibold hover:underline flex items-center gap-1">
-                  <span>🔍 {t("nav.product_finder", "Interactive Product Finder")}</span>
-                </Link>
-              </li>
-              <li>
                 <Link href="/products?category=floor-cleaners" className="hover:text-lioc-tealLight transition-colors">
                   Floor Cleaners & Surface Care
                 </Link>

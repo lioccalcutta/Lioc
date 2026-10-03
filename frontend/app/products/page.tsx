@@ -51,28 +51,36 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
         </div>
       </div>
 
-      {/* Product Finder Promo Banner */}
+      {/* Bulk Evaluation & Custom Formulations Promo Banner */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-r from-teal-500/10 via-emerald-50 to-teal-50 border border-teal-500/20 rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
           <div className="flex items-center gap-3.5">
             <div className="p-3 bg-teal-600 text-white rounded-xl shrink-0 shadow-sm">
-              <Sparkles className="w-6 h-6" />
+              <Package className="w-6 h-6" />
             </div>
             <div>
               <h3 className="font-bold text-base sm:text-lg text-slate-900">
-                Not sure which formulation matches your facility?
+                Need Commercial Sample Evaluation or Custom Batch Formulation?
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
-                Use our 60-second interactive Product Finder to get tailored recommendations by business vertical.
+                Request commercial evaluation kits or direct wholesale factory pricing for your facility.
               </p>
             </div>
           </div>
-          <Link
-            href="/product-finder"
-            className="shrink-0 px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-bold rounded-xl shadow-sm transition-all"
-          >
-            Launch Product Finder →
-          </Link>
+          <div className="flex items-center gap-2 shrink-0">
+            <Link
+              href="/request-sample"
+              className="px-4 py-2 bg-white border border-teal-600 text-teal-700 hover:bg-teal-50 text-xs sm:text-sm font-bold rounded-xl shadow-sm transition-all"
+            >
+              Request Sample Kit
+            </Link>
+            <Link
+              href="/request-quote"
+              className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-bold rounded-xl shadow-sm transition-all"
+            >
+              Request Bulk Quote →
+            </Link>
+          </div>
         </div>
       </div>
 

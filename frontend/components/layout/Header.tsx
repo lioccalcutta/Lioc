@@ -48,9 +48,6 @@ export default function Header() {
   const navLinks = [
     { name: t("nav.home", "Home"), href: "/" },
     { name: t("nav.products", "Products"), href: "/products" },
-    { name: "✨ AI Auditor", href: "/virtual-hygiene-auditor" },
-    { name: "🛡️ Compliance & MSDS", href: "/compliance" },
-    { name: t("nav.product_finder", "Product Finder"), href: "/product-finder" },
     { name: t("nav.industries", "Industries"), href: "/industries" },
     { name: t("nav.about", "About Us"), href: "/about" },
     { name: t("nav.leadership", "Leadership"), href: "/leadership" },
