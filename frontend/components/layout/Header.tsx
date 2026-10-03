@@ -131,22 +131,27 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3.5 group">
-            <div className="relative w-13 h-13 sm:w-14 sm:h-14 rounded-2xl overflow-hidden shadow-lg shadow-teal-950/15 group-hover:scale-105 transition-all bg-black flex items-center justify-center border-2 border-slate-800/80 p-0.5">
+          <Link href="/" className="flex items-center space-x-3 sm:space-x-3.5 group flex-shrink-0">
+            <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden shadow-md shadow-teal-950/20 group-hover:scale-105 transition-transform bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 flex items-center justify-center border-2 border-slate-800/90 ring-1 ring-teal-500/20 p-1 flex-shrink-0">
               <Image
                 src="/logo-symbol.png"
                 alt="LIOC Commercial Hygiene Logo"
-                width={56}
-                height={56}
-                className="w-full h-full object-contain"
+                width={64}
+                height={64}
+                className="w-full h-full object-contain filter drop-shadow"
                 priority
               />
             </div>
-            <div className="flex flex-col">
-              <span className="text-2xl sm:text-3xl font-black tracking-tight text-slate-950 leading-none">
-                LIOC<span className="text-teal-600">.</span>
-              </span>
-              <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-teal-800 mt-0.5">
+            <div className="flex flex-col justify-center">
+              <div className="flex items-center space-x-1.5">
+                <span className="text-2xl sm:text-3xl font-black tracking-tight text-slate-950 leading-none">
+                  LIOC<span className="text-teal-600">.</span>
+                </span>
+                <span className="hidden sm:inline-block px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider bg-teal-50 text-teal-800 border border-teal-200/80 rounded">
+                  Chemical Mfg
+                </span>
+              </div>
+              <span className="text-[10px] sm:text-[11.5px] font-extrabold uppercase tracking-wider text-teal-800 mt-1">
                 {t("brand.tagline", "Chemical Manufacturer & B2B Supply")}
               </span>
             </div>

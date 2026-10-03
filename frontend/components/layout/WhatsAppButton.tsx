@@ -32,13 +32,13 @@ export default function WhatsAppButton({
         <div className="mb-3 bg-white rounded-2xl shadow-2xl p-4 w-72 border border-slate-200 animate-in fade-in slide-in-from-bottom-5 duration-200">
           <div className="flex justify-between items-start pb-2 border-b border-slate-100">
             <div className="flex items-center space-x-2.5">
-              <div className="relative w-9 h-9 rounded-full overflow-hidden bg-black flex items-center justify-center border border-slate-700 flex-shrink-0">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-slate-950 to-teal-950 flex items-center justify-center border border-slate-700 p-0.5 flex-shrink-0 shadow-sm">
                 <Image
-                  src="/logo.jpeg"
-                  alt="Lioc Logo"
-                  width={36}
-                  height={36}
-                  className="w-full h-full object-cover"
+                  src="/logo-symbol.png"
+                  alt="LIOC Logo"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div>

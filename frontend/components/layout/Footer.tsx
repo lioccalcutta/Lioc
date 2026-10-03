@@ -5,10 +5,9 @@ import Link from "next/link";
 
 import Image from "next/image";
 import {
-  Sparkles,
-  MapPin,
+    MapPin,
   Phone,
-  Mail,
+  Mail, 
   Clock,
   ArrowRight,
   ShieldCheck,
@@ -16,6 +15,7 @@ import {
   Truck,
   CheckCircle2,
   Instagram,
+
 } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/config";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
@@ -67,18 +67,18 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center space-x-3.5 group">
-              <div className="relative w-13 h-13 sm:w-14 sm:h-14 rounded-2xl overflow-hidden shadow-md bg-black flex items-center justify-center border-2 border-slate-700/80 p-0.5 group-hover:scale-105 transition-all">
+            <Link href="/" className="flex items-center space-x-3">
+              <div className="relative w-12 h-12 rounded-xl overflow-hidden shadow-md bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 flex items-center justify-center border border-slate-700/80 p-0.5 flex-shrink-0">
                 <Image
                   src="/logo-symbol.png"
-                  alt="LIOC Logo"
-                  width={56}
-                  height={56}
+                  alt="LIOC Commercial Hygiene Logo"
+                  width={48}
+                  height={48}
                   className="w-full h-full object-contain"
                 />
               </div>
-              <span className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                LIOC<span className="text-teal-400">.</span>
+              <span className="text-2xl font-black text-white tracking-tight">
+                LIOC<span className="text-lioc-tealLight">.</span>
               </span>
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
@@ -112,11 +112,6 @@ export default function Footer() {
               {t("footer.formulations", "Formulations & Catalog")}
             </h4>
             <ul className="space-y-2.5 text-xs text-slate-400">
-              <li>
-                <Link href="/compliance" className="text-teal-400 font-semibold hover:underline flex items-center gap-1">
-                  <span>🛡️ Audit Compliance & MSDS Center</span>
-                </Link>
-              </li>
               <li>
                 <Link href="/virtual-hygiene-auditor" className="text-teal-400 font-semibold hover:underline flex items-center gap-1">
                   <span>✨ AI Virtual Hygiene Auditor</span>

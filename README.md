@@ -4,6 +4,7 @@ Lioc is a manufacturing and direct-sales enterprise producing commercial-grade c
 
 ---
 
+
 ## 🏗️ Architecture & Technology Stack
 
 * **Frontend:** Next.js 14 (App Router), React, TypeScript, Tailwind CSS, Lucide Icons

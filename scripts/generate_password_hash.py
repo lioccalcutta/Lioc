@@ -1,14 +1,22 @@
+#!/usr/bin/env python3
 """
 Lioc B2B Platform - Admin Password Hash Generator
 Use this script to generate secure PBKDF2-HMAC-SHA256 hashes for your .env configuration.
 
 Usage:
-    python generate_password_hash.py
-    python generate_password_hash.py "your_new_password"
+    python scripts/generate_password_hash.py
+    python scripts/generate_password_hash.py "your_new_password"
 """
 
 import sys
 import getpass
+from pathlib import Path
+
+# Ensure project root is in sys.path
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 from backend.app.core.security import hash_password
 
 

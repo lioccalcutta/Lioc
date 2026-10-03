@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+"""
+Lioc B2B Platform - Leads Inspection & Export Utility
+View and export customer inquiries (Quotes, Samples, Dealerships, Contact messages).
+
+Usage:
+    python scripts/view_leads.py           # Display formatted summary in console
+    python scripts/view_leads.py --export  # Export all inquiries to CSV in leads_export/
+"""
+
 import sys
 import sqlite3
 import csv
@@ -11,22 +21,46 @@ if sys.platform == "win32":
     except Exception:
         pass
 
-DB_PATH = Path(__file__).resolve().parent / "lioc.db"
+# Resolve database location (supports running from root, scripts/, or backend/)
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent
+
+POSSIBLE_DB_PATHS = [
+    PROJECT_ROOT / "lioc.db",
+    SCRIPT_DIR / "lioc.db",
+    PROJECT_ROOT / "backend" / "lioc.db",
+]
+
+DB_PATH = None
+for p in POSSIBLE_DB_PATHS:
+    if p.exists():
+        DB_PATH = p
+        break
+
+if not DB_PATH:
+    # Fallback to default expected path in project root
+    DB_PATH = PROJECT_ROOT / "lioc.db"
+
 
 def get_connection():
     if not DB_PATH.exists():
-        print(f"[!] Database not found at: {DB_PATH}")
+        print(f"[!] SQLite database not found. Checked locations:")
+        for p in POSSIBLE_DB_PATHS:
+            print(f"    - {p}")
+        print("\nPlease start the backend server once to seed the database.")
         sys.exit(1)
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
+
 
 def show_summary():
     conn = get_connection()
     cur = conn.cursor()
     
     print("\n" + "=" * 80)
-    print(">> LIOC B2B CUSTOMER INQUIRIES & LEADS SUMMARY")
+    print(f">> LIOC B2B CUSTOMER INQUIRIES & LEADS SUMMARY")
+    print(f"   Database: {DB_PATH.resolve()}")
     print("=" * 80)
     
     tables = [
@@ -37,7 +71,12 @@ def show_summary():
     ]
     
     for table_name, title in tables:
-        count = cur.execute(f"SELECT COUNT(*) FROM {table_name}").fetchone()[0]
+        try:
+            count = cur.execute(f"SELECT COUNT(*) FROM {table_name}").fetchone()[0]
+        except sqlite3.OperationalError:
+            print(f"\n{title} (Table not created yet)")
+            continue
+
         print(f"\n{title} (Total: {count})")
         print("-" * 80)
         
@@ -65,21 +104,26 @@ def show_summary():
             print(f"  [{ref}] {created} | {name} ({company}, {city}) | 📞 {phone} | Status: {status}{detail}")
 
     print("\n" + "=" * 80)
-    print("💡 Tip: Run 'python view_leads.py --export' to export all leads into CSV files.")
+    print("💡 Tip: Run 'python scripts/view_leads.py --export' to export all leads into CSV files.")
     print("=" * 80 + "\n")
     conn.close()
+
 
 def export_csv():
     conn = get_connection()
     cur = conn.cursor()
     
-    export_dir = Path(__file__).resolve().parent / "leads_export"
+    export_dir = PROJECT_ROOT / "leads_export"
     export_dir.mkdir(exist_ok=True)
     
     tables = ["quote_requests", "sample_requests", "distributor_applications", "contact_messages"]
     
     for table in tables:
-        rows = cur.execute(f"SELECT * FROM {table} ORDER BY created_at DESC").fetchall()
+        try:
+            rows = cur.execute(f"SELECT * FROM {table} ORDER BY created_at DESC").fetchall()
+        except sqlite3.OperationalError:
+            continue
+
         if not rows:
             continue
         
@@ -93,6 +137,7 @@ def export_csv():
         
     print(f"\n🎉 All leads exported to folder: {export_dir.resolve()}\n")
     conn.close()
+
 
 if __name__ == "__main__":
     if "--export" in sys.argv:

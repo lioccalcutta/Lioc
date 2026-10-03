@@ -23,27 +23,37 @@ import { SITE_CONFIG } from "./config";
 const API_BASE = SITE_CONFIG.apiUrl;
 
 async function fetchWithError<T>(url: string, options?: RequestInit): Promise<T> {
-  const res = await fetch(url, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...options?.headers,
-    },
-    cache: "no-store",
-  });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 4000);
 
-  if (!res.ok) {
-    let errorDetail = "API request failed";
-    try {
-      const errorJson = await res.json();
-      errorDetail = errorJson.detail || errorJson.message || errorDetail;
-    } catch {
-      errorDetail = `HTTP ${res.status}: ${res.statusText}`;
+  try {
+    const res = await fetch(url, {
+      ...options,
+      signal: options?.signal || controller.signal,
+      headers: {
+        "Content-Type": "application/json",
+        ...options?.headers,
+      },
+      cache: "no-store",
+    });
+    clearTimeout(timeoutId);
+
+    if (!res.ok) {
+      let errorDetail = "API request failed";
+      try {
+        const errorJson = await res.json();
+        errorDetail = errorJson.detail || errorJson.message || errorDetail;
+      } catch {
+        errorDetail = `HTTP ${res.status}: ${res.statusText}`;
+      }
+      throw new Error(errorDetail);
     }
-    throw new Error(errorDetail);
-  }
 
-  return res.json();
+    return res.json();
+  } catch (err) {
+    clearTimeout(timeoutId);
+    throw err;
+  }
 }
 
 export const api = {

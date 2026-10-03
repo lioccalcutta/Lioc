@@ -33,13 +33,13 @@ export default function AboutPage() {
       <div className="bg-lioc-navy text-white py-16 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center space-y-4">
           <div className="flex justify-center mb-2">
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl overflow-hidden shadow-2xl bg-black border-2 border-slate-700/80 p-1">
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 border-2 border-slate-700/80 p-2">
               <Image
-                src="/logo.jpeg"
+                src="/logo-symbol.png"
                 alt="LIOC Official Logo"
                 width={96}
                 height={96}
-                className="w-full h-full object-cover rounded-2xl"
+                className="w-full h-full object-contain rounded-2xl"
                 priority
               />
             </div>

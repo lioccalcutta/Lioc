@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import {
   Shield,
@@ -57,29 +57,7 @@ export default function AdminDashboardView() {
     setTimeout(() => setToastMessage(null), 3500);
   };
 
-  // Auth verification on mount
-  useEffect(() => {
-    const savedToken = localStorage.getItem("lioc_admin_token");
-    const savedUser = localStorage.getItem("lioc_admin_user");
-
-    if (!savedToken) {
-      router.push("/admin/login");
-      return;
-    }
-
-    setToken(savedToken);
-    if (savedUser) {
-      try {
-        setAdminUser(JSON.parse(savedUser));
-      } catch {
-        // Ignore
-      }
-    }
-
-    loadDashboardData(savedToken);
-  }, [router]);
-
-  const loadDashboardData = async (authToken: string) => {
+  const loadDashboardData = useCallback(async (authToken: string) => {
     setRefreshing(true);
     try {
       const [statsData, leadsData] = await Promise.all([
@@ -101,7 +79,29 @@ export default function AdminDashboardView() {
       setLoading(false);
       setRefreshing(false);
     }
-  };
+  }, [router]);
+
+  // Auth verification on mount
+  useEffect(() => {
+    const savedToken = localStorage.getItem("lioc_admin_token");
+    const savedUser = localStorage.getItem("lioc_admin_user");
+
+    if (!savedToken) {
+      router.push("/admin/login");
+      return;
+    }
+
+    setToken(savedToken);
+    if (savedUser) {
+      try {
+        setAdminUser(JSON.parse(savedUser));
+      } catch {
+        // Ignore
+      }
+    }
+
+    loadDashboardData(savedToken);
+  }, [router, loadDashboardData]);
 
   const handleLogout = () => {
     localStorage.removeItem("lioc_admin_token");

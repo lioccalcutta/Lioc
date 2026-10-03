@@ -1,4 +1,4 @@
-﻿import { MetadataRoute } from "next";
+import { MetadataRoute } from "next";
 import { api } from "@/lib/api";
 
 const STATIC_PUBLIC_ROUTES = [
@@ -29,7 +29,7 @@ const INDUSTRY_SLUGS = [
 ];
 
 const CATALOG_PRODUCT_SLUGS = [
-  "lioc-white-floor-cleaner-5l",
+  "lioc-white-herbal-floor-cleaner-5l",
   "lioc-heavy-duty-pink-floor-soap-5l",
   "industrial-caustic-soda-flakes",
   "commercial-bleaching-powder-disinfectant",
