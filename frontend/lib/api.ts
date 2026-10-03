@@ -42,7 +42,7 @@ async function fetchWithError<T>(url: string, options?: RequestInit): Promise<T>
       let errorDetail = "API request failed";
       try {
         const errorJson = await res.json();
-        errorDetail = errorJson.detail || errorJson.message || errorDetail;
+        errorDetail = errorJson.error?.message || errorJson.detail || errorJson.message || errorDetail;
       } catch {
         errorDetail = `HTTP ${res.status}: ${res.statusText}`;
       }

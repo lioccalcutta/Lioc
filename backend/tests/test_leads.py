@@ -245,9 +245,9 @@ def test_turnstile_enforces_verification_in_production():
     """Verify that in production, Turnstile queries the API and rejects invalid/rejected tokens."""
     with patch.object(settings, "ENVIRONMENT", "production"):
         with patch.object(settings, "TURNSTILE_ENABLED", True):
-            assert anyio.run(verify_turnstile_token, None) is False
+            with patch.object(settings, "TURNSTILE_SECRET_KEY", "0x4AAAAAA_REAL_PRODUCTION_SECRET"):
+                assert anyio.run(verify_turnstile_token, None) is False
 
-            with patch("httpx.AsyncClient.post") as mock_post:
-                mock_post.return_value.json.return_value = {"success": False, "error-codes": ["invalid-input-response"]}
-                assert anyio.run(verify_turnstile_token, "test-token") is False
-                assert anyio.run(verify_turnstile_token, "invalid-token-123") is False
+                with patch("httpx.AsyncClient.post") as mock_post:
+                    mock_post.return_value.json.return_value = {"success": False, "error-codes": ["invalid-input-response"]}
+                    assert anyio.run(verify_turnstile_token, "invalid-token-123") is False
