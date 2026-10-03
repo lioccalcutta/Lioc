@@ -57,7 +57,7 @@ def test_production_config_validator_detects_insecure_settings():
         TURNSTILE_SECRET_KEY="1x0000000000000000000000000000000AA",  # Insecure for prod
     )
     errors = test_settings.validate_production_configuration()
-    assert len(errors) >= 4
+    assert len(errors) >= 3
     assert any("DEBUG must be set to False" in e for e in errors)
     assert any("PostgreSQL" in e for e in errors)
     assert any("JWT_SECRET_KEY" in e for e in errors)

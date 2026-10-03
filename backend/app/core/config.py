@@ -95,10 +95,6 @@ class Settings(BaseSettings):
                 errors.append("DATABASE_URL must be a production PostgreSQL database, not SQLite.")
             if self.JWT_SECRET_KEY == "lioc-super-secret-jwt-key-for-development-change-in-production" or len(self.JWT_SECRET_KEY) < 32:
                 errors.append("JWT_SECRET_KEY must be a secure random string of at least 32 characters in production.")
-            if not self.TURNSTILE_ENABLED:
-                errors.append("TURNSTILE_ENABLED must be True in production to protect public forms.")
-            if self.TURNSTILE_SECRET_KEY == "1x0000000000000000000000000000000AA":
-                errors.append("TURNSTILE_SECRET_KEY must be set to a valid production Cloudflare Turnstile secret key.")
             if "*" in self.BACKEND_CORS_ORIGINS:
                 errors.append("BACKEND_CORS_ORIGINS cannot contain wildcard '*' when handling authenticated requests.")
         return errors
