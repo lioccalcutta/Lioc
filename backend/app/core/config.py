@@ -67,6 +67,13 @@ class Settings(BaseSettings):
         "http://127.0.0.1:8000",
     ]
 
+    @field_validator("DATABASE_URL", mode="before")
+    @classmethod
+    def clean_database_url(cls, v: str) -> str:
+        if isinstance(v, str):
+            return v.strip().replace("\r", "").replace("\n", "")
+        return v
+
     @field_validator("BACKEND_CORS_ORIGINS", mode="before")
     @classmethod
     def assemble_cors_origins(cls, v: Union[str, List[str]]) -> List[str]:

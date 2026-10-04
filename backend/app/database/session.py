@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker, Session
 from backend.app.core.config import settings
 
 # Normalize legacy or cloud provider postgres:// and postgresql:// URLs to explicit psycopg2 driver
-database_url = settings.DATABASE_URL
+database_url = settings.DATABASE_URL.strip().replace("\r", "").replace("\n", "") if settings.DATABASE_URL else ""
 if database_url.startswith("postgres://"):
     database_url = database_url.replace("postgres://", "postgresql+psycopg2://", 1)
 elif database_url.startswith("postgresql://") and not database_url.startswith("postgresql+"):
