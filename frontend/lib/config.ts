@@ -16,8 +16,8 @@ export const SITE_CONFIG = {
     process.env.NEXT_PUBLIC_COMPANY_ADDRESS ||
     "156, PGH Shah Road, Jadavpur, Kolkata - 700032, West Bengal, India",
   apiUrl: process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api/v1",
-  instagramUrl: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/llioc_calcutta/",
-  instagramHandle: "@llioc_calcutta",
+  instagramUrl: process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/lioc_calcutta/",
+  instagramHandle: "@lioc_calcutta",
   googleMapsUrl:
     process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL ||
     "https://maps.google.com/?q=156+PGH+Shah+Road,+Jadavpur,+Kolkata+-+700032",
